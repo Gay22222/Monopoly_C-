@@ -57,40 +57,7 @@ namespace MonopolyClient
                 mortgagedProperties.Items.Add(property);
             }
         }
-        /**/
-        /*
-        mortgageButton_Click()
-
-        NAME
-
-                mortgageButton_Click() - performs actions upon hitting the Mortgage button
-
-        SYNOPSIS
-
-                private void mortgageButton_Click(object sender, EventArgs e)
-
-        DESCRIPTION
-
-                This function is performed whenever the Mortgage button is clicked on. First, it
-                makes sure a property in the unmortgagedProperties ListBox is selected before doing
-                anything. Otherwise, it will mortgage the property and send a Mortgage command to
-                the server with the property's name as the message, then removes it from the property
-                list and add it to the unmortgagedProperties list.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                4:13pm 5/6/2017
-
-        */
-        /**/
+        
         private void mortgageButton_Click(object sender, EventArgs e)
         {
             // Make sure a property is selected before doing anything.

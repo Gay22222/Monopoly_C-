@@ -19,41 +19,7 @@ namespace MonopolyClient
             InitializeComponent();
             m_client = a_client;
         }
-        /**/
-        /*
-        connectButton_Click()
-
-        NAME
-
-                connectButton_Click() - connects to the server upon clicking the button
-
-        SYNOPSIS
-
-                private void connectButton_Click(object sender, EventArgs e)
-
-        DESCRIPTION
-
-                This function is performed when the Connect button is clicked. It performs
-                necessary name checks to make sure the name is "valid" (no commas, actually
-                entered a name, less than 21 characters). Then it creates the client and
-                attempts to connect to the server with the Client's Connect function. If
-                it was a success, it displays a message saying so and opens the main game
-                window.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:21pm 4/8/2017
-
-        */
-        /**/
+        
         private void connectButton_Click(object sender, EventArgs e)
         {
             // Check if the user entered anything in the text box, entered too much, or entered commas.

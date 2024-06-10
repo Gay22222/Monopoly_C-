@@ -91,51 +91,7 @@ namespace OnlineMonopoly
     		}
     	}
 
-    	/**/
-        /*
-        DoTurn()
-
-        NAME
-
-                DoTurn() - takes a player's turn in the game
-
-        SYNOPSIS
-
-                public void DoTurn(ref Player a_player)
-
-                a_player -> the player that is taking their turn
-
-        DESCRIPTION
-
-                This function is what takes the player's turn in the game. First, above all, it
-                determines if the player is in jail. If so, it will do the "jail turn" processing.
-                If the player has a "Get Out of Jail Free" card, it will be used, the player will
-                be released from jail, and can immediately take their "real turn." Otherwise dice
-                must be rolled for doubles. If the player rolls doubles, they will be released from
-                jail and can immediately take their turn. Otherwise, they stay in jail. If this is
-                their third turn in jail, they will pay the fee to get out of jail ($50), get out,
-                and will immediately take their turn.
-
-                In a real turn, dice are rolled. If this is the third doubles throw in a row, the
-                player is sent to jail. Otherwise, the player moves by the amount of spaces that
-                were rolled on the dice. After moving that amount, the landed on space is "evaluated"
-                and the appropriate action to take is taken. If the player rolled doubles, they go
-                again. Otherwise, their turn then ends.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:15pm 3/23/2017
-
-        */
-        /**/
+    	
     	public void DoTurn(ref Player a_player)
     	{
     		// Check if the player is in jail.
@@ -194,40 +150,7 @@ namespace OnlineMonopoly
 	    	Console.WriteLine(a_player.Name + " is now at " + GetSpacePlayerIsOn(a_player).Name);
     	}
 
-    	/**/
-        /*
-        GetPositions()
-
-        NAME
-
-                GetPositions() - gets the positions of all the players in the game
-
-        SYNOPSIS
-
-                public string GetPositions()
-
-        DESCRIPTION
-
-                This function generates a list of players in the game and the positions on the board
-                that they are currently at. It does this by looking through all of the players in the
-                current player roster and adding into the list the player followed by the name of the
-                space they are currently occupying. A special exception applies for Jail: if the player's
-                boolean for jail indicates they are in jail, Just Visiting instead becomes Jail.
-
-        RETURNS
-
-                A list of players and the positions on the board they are located at.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                3:31pm 4/12/2017
-
-        */
-        /**/
+    	
     	public string GetPositions()
     	{
             // Start building a string.
@@ -248,41 +171,7 @@ namespace OnlineMonopoly
 
             return positionListing;
     	}
-    	/**/
-        /*
-        PlayerExistsInRoster()
-
-        NAME
-
-                PlayerExistsInRoster() - determines if a player with a name already is playing
-
-        SYNOPSIS
-
-                public bool PlayerExistsInRoster(string a_name)
-
-                a_name -> the name to check for
-
-        DESCRIPTION
-
-                This function determines whether or not a player with the name a_name exists in the
-                roster. If so, it returns true. Otherwise, it returns false. This is accomplished
-                by looking at all the players in player roster and seeing if their name matches up
-                with a_name.
-
-        RETURNS
-
-                A boolean determining whether or not someone in the roster has a_name as their name.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                4:05pm 4/12/2017
-
-        */
-        /**/
+    	
     	public bool PlayerExistsInRoster(string a_name)
     	{
     		foreach (Player player in m_playerRoster)
@@ -297,44 +186,7 @@ namespace OnlineMonopoly
     		// The name does not exist in the player roster.
     		return false;
     	}
-    	/**/
-        /*
-        EvaluateSpace()
-
-        NAME
-
-                EvaluateSpace() - evaluates the space the player landed on
-
-        SYNOPSIS
-
-                public string EvaluateSpace(ref Player a_player)
-
-                a_player -> the player on the space
-
-        DESCRIPTION
-
-                This function evaluates the space that the player in the argument landed on. First, it checks if the space is
-                a property. If so, it checks if the property is owned by the player on the space. If so, nothing else needs
-                to be checked and they will return with "nothing." Else, if the property is mortgaged, no rent is owed and they
-                will return. Else, rent is owed and the player must "pay up." If nobody owns the property, it asks the player if
-                they "wanna buy" the space. This only happens if funds are sufficient, however. Of course, this may not be a property
-                and may be an "other" space. So it returns appropriate actions for Chance, Community Chest, Luxury Tax, Income Tax, and
-                Go to Jail spaces, depending on the name.
-
-        RETURNS
-
-                A string that indicates what must be performed as a result of the evaluation.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:27pm 4/3/2017
-
-        */
-        /**/
+    	
     	public string EvaluateSpace(ref Player a_player)
     	{
     		// Get the space that the player landed on.
@@ -411,45 +263,7 @@ namespace OnlineMonopoly
     			}
     		}
     	}
-    	/**/
-        /*
-        CalculateRent()
-
-        NAME
-
-                CalculateRent() - calculates the rent owed on the space
-
-        SYNOPSIS
-
-                public int CalculateRent(Space a_space, int a_spacesMoved)
-
-                a_space -> the space to get the rent of
-                a_spacesMoved -> the amount of spaces moved to get to the space (needed for utility rent calculation)
-
-        DESCRIPTION
-
-                This function calculates the rent owed by whoever lands on the space. First it gets the property on the
-                space and the property's color, then initializes a propCount that will be used for Railroad and Utility
-                rent calculation. If the property's "color" is Railroad or Utility, the function performs appropriate
-                calculations needed. Otherwise, it is a regular property and normal calculations will be used. If the
-                space has at least one building, it will simply return the corresponding rent for the building amount.
-                Otherwise, it will determine if the owner owns all of those properties in the color group. If they do,
-                it returns the normal rent owed * 2. Otherwise, it will just return the rent of the property.
-
-        RETURNS
-
-                An integer for the rent owed.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:13pm 3/24/2017
-
-        */
-        /**/
+    	
     	public int CalculateRent(Space a_space, int a_spacesMoved)
     	{
     		// Get the space's property.
@@ -515,42 +329,7 @@ namespace OnlineMonopoly
                     return propertyOnSpace.Rent;
     		}
     	}
-        /**/
-        /*
-        GetPropertiesToBuildOn()
-
-        NAME
-
-                GetPropertiesToBuildOn() - gets the properties that a player owns that they can build on
-
-        SYNOPSIS
-
-                public List<string> GetPropertiesToBuildOn(string a_name)
-
-                a_name -> the name of the player to check for eligible properties to build on
-
-        DESCRIPTION
-
-                This function gathers a list of properties that the player whose name is passed into the function
-                can build (or sell) buildings on. It does this by looking at all the properties on the board and using
-                PlayerOwnsAll to check the properties of every color group on the board. If the same player owns all
-                of the properties in the color group, and all of those properties have the player has the owner, the
-                properties are added to the buildingList. Once the search is complete, it returns the list.
-
-        RETURNS
-
-                A list of strings that contain the properties the player with a_name is able to build (or sell) on.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                2:26pm 5/31/2017
-
-        */
-        /**/
+        
         public List<string> GetPropertiesToBuildOn(string a_name)
         {
             // Get the player from the name.
@@ -623,41 +402,7 @@ namespace OnlineMonopoly
             // Return the final list.
             return buildingList;
         }
-        /**/
-        /*
-        AllPropertiesHaveNoHouses()
-
-        NAME
-
-                AllPropertiesHaveNoHouses() - determines if all the properties of a color group have no houses
-
-        SYNOPSIS
-
-                public bool AllPropertiesHaveNoHouses(string a_color)
-
-                a_color -> the color of the properties to check if there are houses/buildings on
-
-        DESCRIPTION
-
-                This function determines if all of the properties of a color group have any buildings on them. It
-                accomplishes this through a switch statement and looking at all of the properties in the color group.
-                If any of the properties have at least one building on them, it returns false. Otherwise, it returns
-                true.
-
-        RETURNS
-
-                A boolean that determines if all the properties of the color group have nothing built on any of them.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                2:37pm 6/2/2017
-
-        */
-        /**/
+        
         public bool AllPropertiesHaveNoHouses(string a_color)
         {
             switch(a_color)
@@ -743,41 +488,7 @@ namespace OnlineMonopoly
             a_playerPaying.Funds = a_playerPaying.Funds - a_paymentAmount;
             a_playerReceiving.Funds = a_playerReceiving.Funds + a_paymentAmount;
         }
-        /**/
-        /*
-        DrawCard()
-
-        NAME
-
-                DrawCard() - draws a card from the specified deck
-
-        SYNOPSIS
-
-                public Card DrawCard(ref Player a_player, string a_deckName)
-
-                a_player -> the player that is drawing the card
-                a_deckName -> the name of the deck the player is drawing from
-
-        DESCRIPTION
-
-                This function draws a card from a specified deck. First it determines which deck to draw from
-                by looking at a_deckName. Then it draws from that deck. It puts the card back at the bottom of
-                the deck, then returns the Card that was drawn.
-
-        RETURNS
-
-                The Card that was drawn.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                4:49pm 4/2/2017
-
-        */
-        /**/
+        
         public Card DrawCard(ref Player a_player, string a_deckName)
         {
             // First, draw the card that's on top of the deck.
@@ -789,41 +500,7 @@ namespace OnlineMonopoly
             else m_board.PutCardOnBottom("CommunityChest");
             return topCard;
         }
-        /**/
-        /*
-        PerformCardAction()
-
-        NAME
-
-                PerformCardAction() - does the action associated with the card drawn from a deck
-
-        SYNOPSIS
-
-                public void PerformCardAction(ref Player a_player, string a_action)
-
-                a_player -> the player that drew the card
-                a_action -> the action associated with the card
-
-        DESCRIPTION
-
-                This function performs the action that is associated with the card drawn from a deck. It uses a switch
-                statement determine the appropriate action to take from the card's action string, then performs that action.
-                Since there are many actions for many cards, the switch statement is pretty big.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                1:40pm 4/1/2017
-
-        */
-        /**/
+        
         public void PerformCardAction(ref Player a_player, string a_action)
         {
             // A switch statement is appropriate for this!
@@ -1002,42 +679,7 @@ namespace OnlineMonopoly
             return m_board.GetSpaceWithProperty(a_propertyName);
         }
 
-        /**/
-        /*
-        TradeProperty()
-
-        NAME
-
-                TradeProperty() - trades a property between players
-
-        SYNOPSIS
-
-                public void TradeProperty(ref Player a_playerLosingProperty, ref Player a_playerReceivingProperty, string a_propertyName)
-
-                a_playerLosingProperty -> the player losing the property to be traded
-                a_playerReceivingProperty -> the player receiving the property to be traded
-                a_propertyName -> the name of the property that is being traded
-
-        DESCRIPTION
-
-                This function trades a property from one player to another. First, the property is initialized through the
-                ever useful GetSpaceWithProperty function, then accessing that Space's GetProperty function. Afterwards,
-                it's a very simple process: call RemoveProperty on playerLosingProperty and AddProperty on playerReceivingProperty.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:16pm 5/30/2017
-
-        */
-        /**/
+        
         public void TradeProperty(ref Player a_playerLosingProperty, ref Player a_playerReceivingProperty, string a_propertyName)
         {
             // Get the property.
@@ -1047,39 +689,7 @@ namespace OnlineMonopoly
             a_playerReceivingProperty.AddProperty(ref tradedProperty);
         }
 
-        /**/
-        /*
-        BankruptcyCheck()
-
-        NAME
-
-                BankruptcyCheck() - trades a property between players
-
-        SYNOPSIS
-
-                public string BankruptcyCheck()
-
-        DESCRIPTION
-
-                This function performs bankruptcy checks with all of the players currently still playing.
-                This is achieved through looking at all the players and seeing if their funds are less
-                than 0. If so, the function returns that player's name. They are bankrupt! Otherwise, if
-                nobody is bankrupt, it returns "null."
-
-        RETURNS
-
-                A string that signifies either a bankrupt player or null, meaning nobody is bankrupt.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:43pm 5/31/2017
-
-        */
-        /**/
+        
         public string BankruptcyCheck()
         {
             // cycle through the array list
@@ -1096,42 +706,7 @@ namespace OnlineMonopoly
             return "null";
         }
 
-        /**/
-        /*
-        LiquidateAndBankrupt()
-
-        NAME
-
-                LiquidateAndBankrupt() - trades a property between players
-
-        SYNOPSIS
-
-                public void LiquidateAndBankrupt(ref Player a_player)
-
-                a_player -> the player to bankrupt and liquidate the assets of
-
-        DESCRIPTION
-
-                This function liquidates the assets of a player and bankrupts them. To get this done,
-                all of the properties in the player's property list are looked at. The owner is changed
-                to a blank Player, it is made to be not mortgaged, and the amount of buildings on the
-                property's space is set to 0. Finally, the property is removed from the player's property
-                list. Then the player is added to the bankrupt players list and taken out of the player roster.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:11pm 5/31/2017
-
-        */
-        /**/
+        
         public void LiquidateAndBankrupt(ref Player a_player)
         {
             // All the properties that this player owns are now open season.
@@ -1149,46 +724,7 @@ namespace OnlineMonopoly
             m_bankruptPlayers.Add(a_player);
             m_playerRoster.Remove(a_player);
         }
-    	/**/
-        /*
-        PropertiesOwned()
-
-        NAME
-
-                PropertiesOwned() - determines how many properties of the same color type the owner has
-
-        SYNOPSIS
-
-                private int PropertiesOwned(Property a_property)
-
-                a_property -> the property to check for the same amount of color types owned
-
-        DESCRIPTION
-
-                This function counts how many properties the owner of the property passed in the argument
-                has that are also of the same color type that the argument property has. It does this by
-                getting the owner of the property and then getting the list of properties they own. It then
-                cycles through all of their properties while checking if the property currently being looked
-                at also has the same color type as the argument property's. If so, the count is incremented.
-                Once all is said and done, it returns the count of the properties it found. Additionally, it
-                checks if the properties are mortgaged or not. If a property is mortgaged, having double rent
-                and being able to build is not possible.
-
-        RETURNS
-
-                An integer of how many properties the owner of the argument property has of the same color type
-                that are not mortgaged.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                3:57pm 3/24/2017
-
-        */
-        /**/
+    	
     	private int PropertiesOwned(Property a_property)
     	{
     		// Get the owner of the property.
@@ -1211,41 +747,7 @@ namespace OnlineMonopoly
     		// Return the amount of those properties the owner has (and are not mortgaged).
     		return propCount;
     	}
-    	/**/
-        /*
-        PlayerOwnsAll()
-
-        NAME
-
-                PlayerOwnsAll() - determines if the property's owner owns all of the color group of the argument's property
-
-        SYNOPSIS
-
-                private bool PlayerOwnsAll(Property a_property)
-
-                a_property -> the property to check for the same amount of color types owned
-
-        DESCRIPTION
-
-                This function determines if the property's owner has a "monopoly" on all of the properties in the
-                same color group. First it gets the property's color, then it uses PropertiesOwned() to get the
-                amount of properties in the color group owned by the property's owner. Then it goes into a switch
-                statement to do the appropriate checking for whether or not the player owns all of those properties.
-
-        RETURNS
-
-                An boolean that tells the program whether or not the player owns all of the properties in the color group.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:04pm 3/24/2017
-
-        */
-        /**/
+    	
     	private bool PlayerOwnsAll(Property a_property)
     	{
     		// Get the color to check for.
@@ -1271,42 +773,7 @@ namespace OnlineMonopoly
     				return false;
     		}
     	}
-    	/**/
-        /*
-        PayEveryoneElse()
-
-        NAME
-
-                PayEveryoneElse() - pays everyone else a specified amount
-
-        SYNOPSIS
-
-                private void PayEveryoneElse(ref Player a_player, int a_amount)
-
-                a_player -> the player paying the other players
-                a_amount -> the amount they must pay
-
-        DESCRIPTION
-
-                This function makes a player pay all the other players in the game a certain amount. It does
-                this by cycling through the roster of players and doing a name comparison. If the current player
-                being visited in the array is not the player who must pay, the player paying will have the amount
-                deducted and the current player paid.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:17pm 4/2/2017
-
-        */
-        /**/
+    	
     	private void PayEveryoneElse(ref Player a_player, int a_amount)
     	{
     		// Get the player's name.
@@ -1323,42 +790,7 @@ namespace OnlineMonopoly
     			}
     		}
     	}
-    	/**/
-        /*
-        EveryonePays()
-
-        NAME
-
-                EveryonePays() - everyone pays a specified amount
-
-        SYNOPSIS
-
-                private void EveryonePays(ref Player a_player, int a_amount)
-
-                a_player -> the player receiving money from the other players
-                a_amount -> the amount they must pay
-
-        DESCRIPTION
-
-                This function makes all the other players pay a certain player in the game. It does
-                this by cycling through the roster of players and doing a name comparison. If the
-                current player visited in the array is not the player being paid, the player paying
-                will have the amount deducted and the player in the function argument paid.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:19pm 4/2/2017
-
-        */
-        /**/
+    	
     	private void EveryonePays(ref Player a_player, int a_amount)
     	{
     		// Get the player's name.

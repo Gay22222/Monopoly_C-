@@ -198,40 +198,7 @@ namespace OnlineMonopoly
             }
         }
 
-        /**/
-        /*
-        BuyProperty()
-
-        NAME
-
-                BuyProperty() - buys a property
-
-        SYNOPSIS
-
-                public void BuyProperty(ref Property a_property)
-
-                a_property -> the property to buy on the board
-
-        DESCRIPTION
-
-                This function lets the player "buy" a property on the board. It subtracts the price
-                of the property from the player's funds, adds it to the ArrayList of Properties, then
-                changes the property's owner to match the name of the player.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:47pm 3/13/2017
-
-        */
-        /**/
+        
         public void BuyProperty(ref Property a_property)
         {
             // Buy the property, add it to the player's ArrayList of properties, and change
@@ -240,41 +207,7 @@ namespace OnlineMonopoly
             a_property.Owner = this;
             m_properties.Add(a_property);
         }
-        /**/
-        /*
-        RollDice()
-
-        NAME
-
-                RollDice() - rolls two pairs of dice
-
-        SYNOPSIS
-
-                public void RollDice(ref int a_firstDie, ref int a_secondDie)
-
-                a_firstDie -> the first die to be rolled
-                a_secondDIe -> the second die to be rolled
-
-        DESCRIPTION
-
-                This function lets the player roll a pair of dice to make a move on the board.
-                Random seeds are generated to get numbers between 1-6. If the function detects
-                they are "doubles," then the player's double count is incremented.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                9:58pm 3/13/2017
-
-        */
-        /**/
+        
         public void RollDice(ref int a_firstDie, ref int a_secondDie)
         {
             Random rand = new Random();
@@ -292,44 +225,7 @@ namespace OnlineMonopoly
             // Otherwise, put it at 0.
             else m_doublesCount = 0;
         }
-        /**/
-        /*
-        MakeMove()
-
-        NAME
-
-                MakeMove() - makes the player move on the board
-
-        SYNOPSIS
-
-                public void MakeMove(int a_spacesToMove)
-
-                a_spacesToMove -> the amount of spaces the player will move
-
-        DESCRIPTION
-
-                This function makes the necessary moves the player must make on the board to
-                traverse by the appropriate amount of spaces. Before making the move, however,
-                it will check to see if adding the position of the player and the spaces to move by
-                will throw the position "out of bounds." If so, it will reset the player's
-                position to 0 and adjust a_spacesToMove to the appropriate amount of spaces. It will
-                also give the player $200, since they pass Go by doing this. Then it adds a_spacesToMove
-                and m_playerPosition.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:26pm 3/13/2017
-
-        */
-        /**/
+        
         public void MakeMove(int a_spacesToMove)
         {
             // Before making the move, check the player's current position on the board.
@@ -357,42 +253,7 @@ namespace OnlineMonopoly
             // Make them really in jail by changing the boolean value of m_inJail.
             m_inJail = true;
         }
-        /**/
-        /*
-        MortgageProperty()
-
-        NAME
-
-                MortgageProperty() - mortgages a player's property
-
-        SYNOPSIS
-
-                public void MortgageProperty(string a_property)
-
-                a_property -> the name of the property to mortgage
-
-        DESCRIPTION
-
-                This function mortgages a property that the player owns. First it uses
-                FindProperty to get the property in the player's list. Then it gets the
-                mortgage value. Afterwards, it mortgages the property by changing the
-                corresponding boolean value and adds the mortgage value to the player's
-                funds.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:35pm 5/14/2017
-
-        */
-        /**/
+        
         public void MortgageProperty(string a_property)
         {
             // First, get the property.
@@ -403,42 +264,7 @@ namespace OnlineMonopoly
             mortgageProp.IsMortgaged = true;
             m_funds += mortgageValue;
         }
-        /**/
-        /*
-        UnmortgageProperty()
-
-        NAME
-
-                UmnortgageProperty() - unmortgages a player's property... if possible
-
-        SYNOPSIS
-
-                public bool UnmortgageProperty(string a_property)
-
-                a_property -> the name of the property to unmortgage
-
-        DESCRIPTION
-
-                This function attempts to unmortgage a property the player owns. First
-                it uses FindProperty to find the property in the player's list. Then
-                it gets the unmortgageValue by calculating the mortgage value plus 10%.
-                If funds are sufficient, it changes the mortgage boolean to false, subtracts
-                funds, and returns true. Otherwise, it returns false.
-
-        RETURNS
-
-                A boolean determining whether or not the property can be unmortgaged.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:42pm 5/14/2017
-
-        */
-        /**/
+        
         public bool UnmortgageProperty(string a_property)
         {
              // First, get the property.
@@ -483,40 +309,7 @@ namespace OnlineMonopoly
 
         }
 
-        /**/
-        /*
-        FindProperty()
-
-        NAME
-
-                FindProperty() - finds a property in the player's property list
-
-        SYNOPSIS
-
-                private Property FindProperty(string a_property)
-
-                a_property -> the name of the property to find in the player's property list
-
-        DESCRIPTION
-
-                This function finds a property in the player's property list. It searches through
-                the property ArrayList to find it. If the currently visited Property has the same
-                name as a_property, it returns the property. Otherwise, it returns a blank property.
-
-        RETURNS
-
-                The property that the function is looking for.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:26pm 5/14/2017
-
-        */
-        /**/
+        
         private Property FindProperty(string a_property)
         {
             for (int i = 0; i < m_properties.Count; i++)

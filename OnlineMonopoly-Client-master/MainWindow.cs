@@ -213,42 +213,7 @@ namespace MonopolyClient
                 buildingsWindow.ShowDialog();
             }));
         }
-        /**/
-        /*
-        bankruptcyButton_Click()
-
-        NAME
-
-                bankruptcyButton_Click() - performs actions upon hitting the Bankruptcy button
-
-        SYNOPSIS
-
-                private void bankruptcyButton_Click(object sender, EventArgs e)
-
-        DESCRIPTION
-
-                This function is performed whenever the Bankruptcy button is clicked on. It fetches the
-                funds the player currently has through looking at the fundUpdate label, then makes a decision
-                based on that: if their current Funds are greater than 0, the player is no longer bankrupt
-                and will have buttons changed accordingly. Otherwise, they are still bankrupt and will be
-                asked if they are sure if they want to declare bankruptcy. If so, a Bankrupt command is sent
-                to the Server and all buttons are disabled and their funds are changed to bankrupt. They are
-                now out of the game.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:16pm 5/31/2017
-
-        */
-        /**/
+        
         private void bankruptcyButton_Click(object sender, EventArgs e)
         {
             // When clicking this button, there can only be two outcomes: the player getting back in after selling

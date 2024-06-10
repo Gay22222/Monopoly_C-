@@ -61,40 +61,7 @@ namespace MonopolyClient
                 }
             }
         }
-        /**/
-        /*
-        namesBox_SelectedIndexChanged()
-
-        NAME
-
-                namesBox_SelectedIndexChanged() - performs actions when the namesBox changes selected index
-
-        SYNOPSIS
-
-                private void namesBox_SelectedIndexChanged(object sender, System.EventArgs e)
-
-        DESCRIPTION
-
-                This function is performed whenever the selected item in the namesBox ListBox is changed.
-                It clears the requested player's properties first, gets the selected name, then sends the
-                GetProperties command. It sleeps for a little and waits for the client to receive information
-                from the server. After all is said and done, the theirPropertiesBox ListBox is populated
-                with the tradable properties that the selected player owns.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:34pm 5/30/2017
-
-        */
-        /**/
+        
         private void namesBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             // First, clear the requested player property list in the client.
@@ -118,40 +85,7 @@ namespace MonopolyClient
                 theirPropertiesBox.Items.Add(property);
             }
         }
-        /**/
-        /*
-        offerButton_Click()
-
-        NAME
-
-                offerButton_Click() - performs actions upon hitting the Offer button
-
-        SYNOPSIS
-
-                private void offerButton_Click(object sender, EventArgs e)
-
-        DESCRIPTION
-
-                This function is performed whenever the Mortgage button is clicked on. First, it
-                makes sure a property in the unmortgagedProperties ListBox is selected before doing
-                anything. Otherwise, it will mortgage the property and send a Mortgage command to
-                the server with the property's name as the message, then removes it from the property
-                list and add it to the unmortgagedProperties list.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:06pm 5/30/2017
-
-        */
-        /**/
+        
         private void offerButton_Click(object sender, EventArgs e)
         {
             // If there are no selections in either of the list boxes, return.
@@ -191,47 +125,7 @@ namespace MonopolyClient
             // All the checks seem to have passed. So let's start the trade offer!
             SendTradeRequest();
         }
-        /**/
-        /*
-        SendTradeRequest()
-
-        NAME
-
-                SendTradeRequest() - sends a trade request to the server
-
-        SYNOPSIS
-
-                private void SendTradeRequest()
-
-        DESCRIPTION
-
-                This function is called when the client is sending a trade request to the server.
-                It does this by creating a comma separated string in the following structure:
-                propertyOffered -> the property offered by the player
-                moneyOffered -> the money offered by the player
-                requestedPlayer -> the player to send the request to
-                propertyRequested -> the property the player wants to receive
-                moneyRequested -> the money the player wants to receive
-                It then sends a TradeRequest command to the server, where it will perform the
-                necessary operations to start the process of requesting a trade.
-                Note: If there is anything not offered in the trade (for example, $0), the
-                corresponding string is replaced with "null" and is ignored in parsing and
-                checking operations throughout the trade.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:52pm 5/30/2017
-
-        */
-        /**/
+        
         private void SendTradeRequest()
         {
             // Get the necessary info we need to send.

@@ -60,42 +60,7 @@ namespace OnlineMonopoly
             m_chanceDeck.ShuffleDeck();
             m_communityChestDeck.ShuffleDeck();
         }
-        /**/
-        /*
-        SpaceAt()
-
-        NAME
-
-                SpaceAt() - returns a space on the board at an indicated index
-
-        SYNOPSIS
-
-                public int SpaceAt(int a_index)
-
-                a_index -> the index in the m_spaceContainer array to access
-
-        DESCRIPTION
-
-                This function looks for a space on the board that pertains to the appropriate index
-                in the array of Spaces stored inside the class. If the range is valid (0-39), it will
-                return the space indicated. Otherwise, it will return an empty space and display an
-                error message in the console window.
-
-        RETURNS
-
-                Returns a space in m_spaceContainer or an empty space, depending on whether or not the
-                validity check passed or not.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                11:00am 2/27/2017
-
-        */
-        /**/
+        
         public Space SpaceAt(int a_index)
         {
             // Only return a space within the appropriate index range (0-39). If it's higher, return an error
@@ -107,41 +72,7 @@ namespace OnlineMonopoly
                 return new Space();
             }
         }
-        /**/
-        /*
-        SpaceAt()
-
-        NAME
-
-                BuildOn() - builds a building on the space at an indicated index
-
-        SYNOPSIS
-
-                public int BuildOn(int a_index)
-
-                a_index -> the index in the m_spaceContainer array to access
-
-        DESCRIPTION
-
-                This function adds a building to the space on the board at an indicated index. However,
-                the code is smart enough to know that a building should contain no more than a hotel (5 buildings).
-                If it detects that the building amount is greater than 5, it displays a message to the console
-                window indicating that building on the space is not possible.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:32pm 2/27/2017
-
-        */
-        /**/
+        
         public void BuildOn(int a_index)
         {
             // Only build something on the space if the amount of buildings are less than 5.
@@ -163,42 +94,7 @@ namespace OnlineMonopoly
             else m_communityChestDeck.MoveTopCardToBottom();
         }
         
-        /**/
-        /*
-        SpaceAt()
-
-        NAME
-
-                GetSpaceWithProperty() - gets the space with the specified property name
-
-        SYNOPSIS
-
-                public Space GetSpaceWithProperty(string a_propertyName)
-
-                a_propertyName -> the name of the property to get the space of
-
-        DESCRIPTION
-
-                This function gets a space on the board that has the property in the argument.
-                It does this by searching in the space container within the board. If the space's
-                property has the same name as a_propertyName, it will return the Space. This should
-                always return a space due to the nature of how this is programmed, but just in case
-                it doesn't, it returns an empty space. Just to avoid bellyaching!
-
-        RETURNS
-
-                Returns the Space that contains the property the function is looking for.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:31pm 5/25/2017
-
-        */
-        /**/
+        
         public Space GetSpaceWithProperty(string a_propertyName)
         {
             // Search the board for the space we're looking for.

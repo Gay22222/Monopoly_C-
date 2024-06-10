@@ -24,38 +24,7 @@ namespace OnlineMonopoly
             // The game hasn't started yet, so...
             m_gameStarted = false;
     	}
-    	/**/
-        /*
-        SetUpServer()
-
-        NAME
-
-                SetUpServer() - buys a property
-
-        SYNOPSIS
-
-                public void SetUpServer()
-
-        DESCRIPTION
-
-                This function sets up the server to clients can connect. It uses the server's
-                socket to bind, start listening for new connections, and begin accepting new
-                connections in an asynchronous manner.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:40pm 4/8/2017
-
-        */
-        /**/
+    	
     	public void SetUpServer()
     	{
     		// Tell the console window we are setting up the server.
@@ -151,37 +120,7 @@ namespace OnlineMonopoly
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 510)]
             private string s_message;
         }
-        /**/
-        /*
-        GetBytes()
-
-        NAME
-
-                GetBytes() - converts a PlayerCommand struct into a byte array
-
-        SYNOPSIS
-
-                private byte[] GetBytes(PlayerCommand a_command)
-
-        DESCRIPTION
-
-                This function uses marshaling to convert a PlayerCommand structure to a byte
-                array.
-
-        RETURNS
-
-                A byte array containing the structure that it converted.
-
-        AUTHOR
-
-                Vincent McNabb
-
-        DATE
-
-                6:21pm 4/13/2017
-
-        */
-        /**/
+        
         private byte[] GetBytes(PlayerCommand a_command)
         {
             // Get the size of the struct.
@@ -194,37 +133,7 @@ namespace OnlineMonopoly
             Marshal.FreeHGlobal(ptr);
             return data;
         }
-        /**/
-        /*
-        GetStruct()
-
-        NAME
-
-                GetStruct() - converts a byte array into a struct
-
-        SYNOPSIS
-
-                private PlayerCommand GetStruct(byte[] a_bytes)
-
-        DESCRIPTION
-
-                This function uses marshaling to convert a byte array into a PlayerCommand
-                struct.
-
-        RETURNS
-
-                A PlayerCommand structure containing data from the byte array it converted.
-
-        AUTHOR
-
-                Vincent McNabb
-
-        DATE
-
-                6:24pm 4/13/2017
-
-        */
-        /**/
+        
         private PlayerCommand GetStruct(byte[] a_bytes)
         {
             PlayerCommand structure = new PlayerCommand();
@@ -237,41 +146,7 @@ namespace OnlineMonopoly
 
             return structure;
         }
-        /**/
-        /*
-        AcceptCallback()
-
-        NAME
-
-                AcceptCallback() - accepts new connections to the server
-
-        SYNOPSIS
-
-                private void AcceptCallback(IAsyncResult AR)
-
-                AR -> the status of an asynchronous operation
-
-        DESCRIPTION
-
-                This function accepts clients and lets them connect to the server. First, it accepts the client.
-                Then it begins receiving information from the client pertaining to the game. It adds the socket
-                to the list of clients afterwards. Due to the nature of Monopoly (8 player maximum), the server
-                stops accepting new connections once 8 clients are connected.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:40pm 4/8/2017
-
-        */
-        /**/
+        
     	private void AcceptCallback(IAsyncResult AR)
     	{
     		// Accept a client.
@@ -286,44 +161,7 @@ namespace OnlineMonopoly
             if (m_clientSockets.Count < 8) m_serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
             // Otherwise, no more players can enter the game. Don't accept more.
     	}
-        /**/
-        /*
-        ReceiveCallback()
-
-        NAME
-
-                ReceiveCallback() - receives information sent from the client
-
-        SYNOPSIS
-
-                private void ReceiveCallback(IAsyncResult AR)
-
-                AR -> the status of an asynchronous operation
-
-        DESCRIPTION
-
-                This function receives an array of bytes send by the client. It transforms the
-                bytes received into the PlayerCommand structure using GetStruct and proceeds to
-                perform actions based on the Command that was sent through the structure. This is
-                achieved through an admittedly large switch statement. After performing the appropriate
-                actions, the server will start accepting information from the client once more. If
-                it detects a player has disconnected, it will perform appropriate disconnect actions
-                depending on the amount of players left in the game.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:51pm 4/8/2017
-
-        */
-        /**/
+        
     	private void ReceiveCallback(IAsyncResult AR)
     	{
     		// Get the socket that is sending information to the server.
@@ -492,39 +330,7 @@ namespace OnlineMonopoly
                 BankruptPlayerActions(disconnectedPlayer.Name);
     		}
     	}
-        /**/
-        /*
-        SendCallback()
-
-        NAME
-
-                SendCallback() - sends information to the client
-
-        SYNOPSIS
-
-                private void SendCallback(IAsyncResult AR)
-
-                AR -> the status of an asynchronous operation
-
-        DESCRIPTION
-
-                This function sends information to a client. Once the information is sent, EndSend is called.
-                Not too much to describe here!
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:56pm 4/8/2017
-
-        */
-        /**/
+        
     	private void SendCallback(IAsyncResult AR)
     	{
     		try
@@ -543,44 +349,7 @@ namespace OnlineMonopoly
             foreach (Socket connectedClient in m_clientSockets)
                 connectedClient.BeginSend(a_buffer, 0, a_buffer.Length, SocketFlags.None, new AsyncCallback(SendCallback), connectedClient);
         }
-        /**/
-        /*
-        ProcessJoin()
-
-        NAME
-
-                ProcessJoin() - processes a player joining the game
-
-        SYNOPSIS
-
-                private void ProcessJoin(string a_name, ref Socket a_socket)
-
-                a_name -> the name of the player trying to join the game
-                a_socket -> the socket trying to conect to the server
-
-        DESCRIPTION
-
-                This function processes a Join command received from a player. If the
-                game has already started or the name already exists, the player cannot
-                join the game and will have a No command sent to them and their socket
-                is closed and removed from the client sockets list. Otherwise they can
-                join the game! Add them to the game and send a Yes command to tell them
-                they successfully joined.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:01pm 4/10/2017
-
-        */
-        /**/
+        
         private void ProcessJoin(string a_name, ref Socket a_socket)
         {
             // Create a response communication.
@@ -618,45 +387,7 @@ namespace OnlineMonopoly
                 a_socket.BeginSend(yesBuffer, 0, yesBuffer.Length, SocketFlags.None, new AsyncCallback(SendCallback), a_socket);
             }
         }
-        /**/
-        /*
-        ProcessStart()
-
-        NAME
-
-                ProcessStart() - processes a player starting the game
-
-        SYNOPSIS
-
-                private void ProcessStart(byte[] a_buffer, ref Socket a_socket)
-
-                a_buffer -> the buffer containing PlayerCommand information
-                a_socket -> the socket sending the command
-
-        DESCRIPTION
-
-                This function processes a Start command received from one of the
-                game's players. First, it determines if a game can actually be started.
-                If there is more than one player currently connected, the game will start.
-                It sends a Start command to all of the clients (to turn off the Start Game button)
-                and then sends a TurnStart command to the first socket connected to the server, as
-                they are the first player. Otherwise, a NoStart command is sent back to the
-                client. They cannot start the game if they are the only person in the server.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:24pm 4/10/2017
-
-        */
-        /**/
+        
         private void ProcessStart(byte[] a_buffer, ref Socket a_socket)
         {
             // Initialize a PlayerCommand.
@@ -682,41 +413,7 @@ namespace OnlineMonopoly
                 a_socket.BeginSend(noStartBuffer, 0, noStartBuffer.Length, SocketFlags.None, new AsyncCallback(SendCallback), a_socket);
             }
         }
-        /**/
-        /*
-        RollDice()
-
-        NAME
-
-                RollDice() - lets a player roll the dice
-
-        SYNOPSIS
-
-                private void RollDice(ref Player a_player)
-
-                a_player -> the player rolling the dice
-
-        DESCRIPTION
-
-                This function rolls the dice for a player specified in the argument. It does this
-                by calling the RollDice function in the Player class, then sends this roll to
-                all the clients so it can be displayed to them. It also sends a chat message that
-                indicates what the player rolled. Afterwards, the player can take their turn in DoTurn.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                12:07pm 4/12/2017
-
-        */
-        /**/
+        
         private void RollDice(ref Player a_player)
         {
             // Initialize integers for the die roll and roll for them.
@@ -732,42 +429,7 @@ namespace OnlineMonopoly
             // Process the player's turn.
             DoTurn(ref a_player);
         }
-        /**/
-        /*
-        DoTurn()
-
-        NAME
-
-                DoTurn() - lets a player roll the dice
-
-        SYNOPSIS
-
-                private void DoTurn(ref Player a_player)
-
-                a_player -> the player doing their turn
-
-        DESCRIPTION
-
-                This function performs a turn for the player. This is done by calling DoTurn in the Game class, then performing
-                appropriate actions, such as sending position updates and appropriate Go actions. Afterwards, the space they
-                landed on will be evaluated. The appropriate function to call upon the string returned from EvaluateSpace
-                is done in a switch statement. Afterwards, a bankruptcy check is performed to see if anyone is bankrupt.
-                The appropriate action for bankruptcy is taken as well, should it be necessary.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                12:42pm 4/12/2017
-
-        */
-        /**/
+        
         private void DoTurn(ref Player a_player)
         {
             // Do their turn.
@@ -838,40 +500,7 @@ namespace OnlineMonopoly
                     new AsyncCallback(SendCallback), null);
             }
         }
-        /**/
-        /*
-        RentActions()
-
-        NAME
-
-                RentActions() - performs rent actions between players
-
-        SYNOPSIS
-
-                private void RentActions(ref Player a_player)
-
-                a_player -> the player paying rent
-
-        DESCRIPTION
-
-                This function performs rent actions between appropriate players. It calculates the rent owed on the space
-                the player is on. It exchanges funds between the players, builds the appropriate rent message box dialogues
-                for each player, then sends them to the respective players.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                2:05pm 4/12/2017
-
-        */
-        /**/
+        
         private void RentActions(ref Player a_player)
         {
             // Pay up the rent, as it is owed.
@@ -902,40 +531,7 @@ namespace OnlineMonopoly
             // Sleep for a little to avoid connection errors.
             System.Threading.Thread.Sleep(50);
         }
-        /**/
-        /*
-        AskToBuyProperty()
-
-        NAME
-
-                AskToBuyProperty() - asks the player if they want to buy a property
-
-        SYNOPSIS
-
-                private void AskToBuyProperty(Player a_player)
-
-                a_player -> the player to ask
-
-        DESCRIPTION
-
-                This function asks a player if they want to buy a property. It gets the property they landed on
-                then starts generating a message to send to the player to determine if they want to go through
-                with buying the property or not. It sends the command afterwards.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                1:18pm 4/14/2017
-
-        */
-        /**/
+        
         private void AskToBuyProperty(Player a_player)
         {
             // Get the property the player landed on and start generating the dialog box.
@@ -957,42 +553,7 @@ namespace OnlineMonopoly
             Property spaceProperty = m_game.GetSpacePlayerIsOn(a_player).GetProperty();
             a_player.BuyProperty(ref spaceProperty);
         }
-        /**/
-        /*
-        MortgageProperty()
-
-        NAME
-
-                MortgageProperty() - mortgages a player's property
-
-        SYNOPSIS
-
-                private void MortgageProperty(string a_player, string a_property)
-
-                a_player -> the player mortgaging a property
-                a_property -> the name of the property to mortgage
-
-        DESCRIPTION
-
-                This function mortgages a property from the player's properties. It only mortgages
-                the property if it's able to, however (cannot be mortgaged if there is at least one
-                building on it). If it can't, it sends a command indicating as such to the player.
-                Otherwise, it mortgages the property.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                1:37pm 4/14/2017
-
-        */
-        /**/
+        
         private void MortgageProperty(string a_player, string a_property)
         {
             // Get the player, then call the MortgageProperty function on them.
@@ -1020,42 +581,7 @@ namespace OnlineMonopoly
             Player player = m_game.GetPlayer(a_player);
             return player.UnmortgageProperty(a_property);
         }
-        /**/
-        /*
-        PayTax()
-
-        NAME
-
-                PayTax() - informs a player that a tax has to be paid
-
-        SYNOPSIS
-
-                private void PayTax(Player a_player, string a_rentType)
-
-                a_player -> the player paying a tax
-                a_rentType -> the type of rent the player has to pay
-
-        DESCRIPTION
-
-                This function sends a command to the player that indicates
-                they must pay a tax. It generates a PlayerCommand with the
-                type of tax to pay in the name, then sends the command over
-                to the player.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                3:28pm 4/14/2017
-
-        */
-        /**/
+        
         private void PayTax(Player a_player, string a_rentType)
         {
             // Generate a PlayerCommand to communicate with the client.
@@ -1078,42 +604,8 @@ namespace OnlineMonopoly
             byte[] jailBytes = GetBytes(sentToJail);
             m_clientSockets[a_player.RosterPosition].BeginSend(jailBytes, 0, jailBytes.Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendCardInfo()
-
-        NAME
-
-                SendCardInfo() - sends info about a card that was drawn to a player
-
-        SYNOPSIS
-
-                private void SendCardInfo(Player a_player, string a_action, string a_description)
-
-                a_player -> the player to have the card info sent to
-                a_action -> the card action
-                a_description -> the card description
-
-        DESCRIPTION
-
-                This function sends information about a card the player drew to the player.
-                It compiles everything about the card within the PlayerCommand structure
-                then sends it over.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:20pm 4/22/2017
-
-        */
-        /**/
+        
+        
         private void SendCardInfo(Player a_player, string a_action, string a_description)
         {
             // Generate a PlayerCommand.
@@ -1127,43 +619,7 @@ namespace OnlineMonopoly
             // Sleep for a little bit?
             System.Threading.Thread.Sleep(50);
         }
-        /**/
-        /*
-        SendCardInfo()
-
-        NAME
-
-                SendCardInfo() - sends info about a card that was drawn to a player
-
-        SYNOPSIS
-
-                private void DoCardActions(string a_player, string a_action)
-
-                a_player -> the player that needs the card action to be done to
-                a_action -> the card action to perform
-
-        DESCRIPTION
-
-                This function peforms the action associated with the card they
-                drew. It uses a switch statement to determine which function
-                to perform and what action to take. It also performs a bankruptcy
-                check as it's possible to be bankrupted from a card if you are
-                unfortunate enough.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                4:15pm 4/28/2017
-
-        */
-        /**/
+        
         private void DoCardActions(string a_player, string a_action)
         {
             // Get the player from the name.
@@ -1316,43 +772,7 @@ namespace OnlineMonopoly
             byte[] fundBytes = GetBytes(fundSend);
             m_clientSockets[requester.RosterPosition].BeginSend(fundBytes, 0, fundBytes.Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendPlayerNames()
-
-        NAME
-
-                SendPlayerNames() - sends a list of names to a player
-
-        SYNOPSIS
-
-                private void SendPlayerNames(string a_name)
-
-                a_name -> the player requesting the list of names of other players
-
-        DESCRIPTION
-
-                This function sends a list of players currently still in the game to
-                a player that requests them. It does this by getting the list of all
-                the players then going through them all and adding them to a string,
-                separating them by commas. The foreach loop makes sure to exclude the
-                player requesting the list. After all is said and done, it sends the
-                list over to the player using the GetNames command.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                11:02am 5/15/2017
-
-        */
-        /**/
+        
         private void SendPlayerNames(string a_name)
         {
             // Get the player requesting the list.
@@ -1377,43 +797,7 @@ namespace OnlineMonopoly
             byte[] listBytes = GetBytes(listSend);
             m_clientSockets[requester.RosterPosition].BeginSend(listBytes, 0, listBytes.Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendProperties()
-
-        NAME
-
-                SendProperties() - sends a list of properties a player has to another player
-
-        SYNOPSIS
-
-                private void SendProperties(string a_requester, string a_requestedPlayer)
-
-                a_requester -> the player requesting the list of properties
-                a_requestedPlayer -> the player whose property list is requested
-
-        DESCRIPTION
-
-                This function sends a list of properties a player owns to another player
-                for a prospective trade. This is done by looking at the list of properties
-                the requested player owns and adds each property to the list, but only if the
-                property is not mortgaged and has no buildings on it. Afterwards, a comma
-                separated string list is built based on the list and sent over to the requester. 
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:52pm 5/30/2017
-
-        */
-        /**/
+        
         private void SendProperties(string a_requester, string a_requestedPlayer)
         {
             // Get the respective players.
@@ -1449,42 +833,7 @@ namespace OnlineMonopoly
             m_clientSockets[requester.RosterPosition].BeginSend(propertyByte, 0, propertyByte.Length, SocketFlags.None,
                 new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendTradeFunds()
-
-        NAME
-
-                SendTradeFunds() - sends a list of properties a player has to another player
-
-        SYNOPSIS
-
-                private void SendTradeFunds(string a_requester, string a_requestedPlayer)
-
-                a_requester -> the player requesting the funds of each player
-                a_requestedPlayer -> the player whose funds are requested
-
-        DESCRIPTION
-
-                This function sends the funds of a requesting player and a requested player to
-                the requester for a prospective trade. It does this by getting both of their funds,
-                transforming them into strings, separating those strings in another string with a comma,
-                then sending it over to the requester using the GetFunds command. 
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                9:06pm 5/30/2017
-
-        */
-        /**/
+        
         private void SendTradeFunds(string a_requester, string a_requestedPlayer)
         {
             // Get the respective players.
@@ -1502,43 +851,7 @@ namespace OnlineMonopoly
             m_clientSockets[requester.RosterPosition].BeginSend(fundBytes, 0, fundBytes.Length, SocketFlags.None,
                  new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        DoTradeRequest()
-
-        NAME
-
-                DoTradeRequest() - sends a request for a trade to a player
-
-        SYNOPSIS
-
-                private void DoTradeRequest(string a_name, string a_message)
-
-                a_name -> the name of the player who is requesting the trade
-                a_message -> the message containing all the information about the trade
-
-        DESCRIPTION
-
-                This function sends a request to trade to a specific player. This player
-                is received through parsing a_message and accessing the appropriate part
-                of the message to receive the player (always split as property,money,player,
-                property,money). Then it sends the info about the trade, a_message, to the
-                player who is being requested for a trade using the TradeRequest command.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                9:42pm 5/30/2017
-
-        */
-        /**/
+        
         private void DoTradeRequest(string a_name, string a_message)
         {
             // Parse some necessary info:
@@ -1554,44 +867,7 @@ namespace OnlineMonopoly
             m_clientSockets[requestedPlayer.RosterPosition].BeginSend(tradeBytes, 0, tradeBytes.Length,
                 SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        ProcessTrade()
-
-        NAME
-
-                ProcessTrade() - sends a request for a trade to a player
-
-        SYNOPSIS
-
                 private void ProcessTrade(string a_name, string a_tradeInfo)
-
-                a_name -> the name of the player who is requesting the trade
-                a_tradeInfo -> the information about the trade that will be done
-
-        DESCRIPTION
-
-                This function processes a trade that has been approved by both players.
-                It parses the tradeInfo into an array of strings then begins the trade.
-                It only performs certain parts of the trade if those parts do not have
-                "null" as their part of the trade information. Once the trade is complete,
-                it sends a message to both players indicating that the trade was a success.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:46pm 5/30/2017
-
-        */
-        /**/
-        private void ProcessTrade(string a_name, string a_tradeInfo)
         {
             // Parse the trade info.
             string[] tradeInfo = a_tradeInfo.Split(',');
@@ -1649,43 +925,7 @@ namespace OnlineMonopoly
             m_clientSockets[requester.RosterPosition].BeginSend(declineBytes, 0, declineBytes.Length, SocketFlags.None,
                 new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendPropertiesToBuildOn()
-
-        NAME
-
-                SendPropertiesToBuildOn() - sends a request for a trade to a player
-
-        SYNOPSIS
-
-                private void SendPropertiesToBuildOn(string a_name)
-
-                a_name -> the name of the player who is trying to buy buildings
-
-        DESCRIPTION
-
-                This function sends a list of properties that are able to be
-                built on to a player requesting the list. It does this by getting
-                the list of properties that can be built on in Game's
-                GetPropertiesToBuildOn function and builds a comma separated string
-                to send over to the player. It then sends that message over with the
-                GetBuildingProperties command.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                1:54pm 5/31/2017
-
-        */
-        /**/
+        
         private void SendPropertiesToBuildOn(string a_name)
         {
             // Get the list of properties.
@@ -1703,42 +943,7 @@ namespace OnlineMonopoly
             m_clientSockets[m_game.GetPlayer(a_name).RosterPosition].BeginSend(propertyBytes, 0, propertyBytes.Length,
                 SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        SendBuildingInfo()
-
-        NAME
-
-                SendBuildingInfo() - sends a request for a trade to a player
-
-        SYNOPSIS
-
-                private void SendBuildingInfo(string a_name, string a_propertyName)
-
-                a_name -> the name of the player who owns the property and wants to get building info
-                a_propetyName -> the name of the property to get the building info for
-
-        DESCRIPTION
-
-                This function sends the information about a property's buildings to a player who wants
-                to know said information. It gets the amount of buildings on the property's space and
-                the cost of buildings to put on it. It then converts these numbers to strings and sends
-                them to the player in a comma separated string with the GetBuildingInfo command.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                2:17pm 5/31/2017
-
-        */
-        /**/
+        
         private void SendBuildingInfo(string a_name, string a_propertyName)
         {
             // Get the property and the space that contains the propery.
@@ -1756,44 +961,7 @@ namespace OnlineMonopoly
             m_clientSockets[m_game.GetPlayer(a_name).RosterPosition].BeginSend(buildingBytes, 0, buildingBytes.Length,
                 SocketFlags.None, new AsyncCallback(SendCallback), null);
         }
-        /**/
-        /*
-        BuyBuildingActions()
-
-        NAME
-
-                BuyBuildingActions() - performs actions for buying a building
-
-        SYNOPSIS
-
-                private void BuyBuildingActions(string a_name, string a_propertyName)
-
-                a_name -> the name of the player who wants to buy a building
-                a_propetyName -> the name of the property to build on
-
-        DESCRIPTION
-
-                This function builds on a property. Before doing anything, it determines if
-                the player has sufficient funds for a building. If they don't, it sends back
-                the BuyBuilding command to indicate that a building cannot be bought for the
-                property/space due to not having enough money. Otherwise, it adds a building,
-                subtracts the cost of the building from the player's funds, and sends a fund
-                update to the player.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                2:43pm 5/31/2017
-
-        */
-        /**/
+        
         private void BuyBuildingActions(string a_name, string a_propertyName)
         {
             // Get the player.
@@ -1834,42 +1002,7 @@ namespace OnlineMonopoly
             // Send a fund update.
             SendPlayerFunds(a_name);
         }
-        /**/
-        /*
-        BankruptPlayerActions()
-
-        NAME
-
-                BankruptPlayerActions() - performs actions for bankrupting a player
-
-        SYNOPSIS
-
-                private void BankruptPlayerActions(string a_name)
-
-                a_name -> the name of the player to bankrupt
-
-        DESCRIPTION
-
-                This function performs appropriate actions on a player that is declaring bankruptcy. It
-                calls LiquidateAndBankrupt on them to get rid of any assets they may have and move them
-                into the bankrupt player roster. Then it sees if there is only one remaining player left
-                in the game. If so, they win! Everyone is sent a message about the winner of the game.
-                It is now over.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                10:34pm 5/31/2017
-
-        */
-        /**/
+        
         private void BankruptPlayerActions(string a_name)
         {
             // This player is declaring bankruptcy. Get rid of any assets they may have.

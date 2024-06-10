@@ -203,44 +203,7 @@ namespace MonopolyClient
                 m_mainWindow = value;
             }
         }
-        /**/
-        /*
-        Connect()
-
-        NAME
-
-                Connect() - lets the client connect to the server
-
-        SYNOPSIS
-
-                public bool Connect(string a_ipAddress)
-
-                a_ipAddress -> the IP address of the server to connect to
-
-        DESCRIPTION
-
-                This function is performed when a client tries connecting to a game server.
-                First, it tries connect to the IP address. If it cannot, it shows a message
-                saying so and returns false. Otherwise, the connection was a success and it
-                sends a Join command to the server. It receives the Join response from the server
-                and converts it into a PlayerCommand struct. If the command is Yes, it calls
-                BeginReceive and returns true. Otherwise, it returns false after showing a
-                MessageBox that shows why the connection could not be made.
-
-        RETURNS
-
-                A boolean that determines whether or not the connection was a success.
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                5:14pm 4/8/2017
-
-        */
-        /**/
+        
         public bool Connect(string a_ipAddress)
     	{
             // Connect to the server.
@@ -271,43 +234,7 @@ namespace MonopolyClient
     		MessageBox.Show(response.Message, "Khong the ket noi");
     		return false;
     	}
-        /**/
-        /*
-        SendCommand()
-
-        NAME
-
-                SendCommand() - lets the client connect to the server
-
-        SYNOPSIS
-
-                public void SendCommand(string a_command, string a_message)
-
-                a_command -> the command to send to the server
-                a_message -> the message that may be sent to the server, depending on the command
-
-        DESCRIPTION
-
-                This function sends a command that the client wants to send to the server. It sets
-                up a PlayerCommand, then uses a switch statement to look at the string command that was
-                passed into the function. It performs the appropriate actions for each command and replaces
-                the blank message that was initialized in the PlayerCommand if necessary. Then it sends the
-                command to the server.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:56pm 4/9/2017
-
-        */
-        /**/
+        
     	public void SendCommand(string a_command, string a_message)
     	{
     		// Set up a new player command.
@@ -503,37 +430,7 @@ namespace MonopolyClient
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 510)]
             private string s_message;
         }
-        /**/
-        /*
-        GetBytes()
-
-        NAME
-
-                GetBytes() - converts a PlayerCommand struct into a byte array
-
-        SYNOPSIS
-
-                private byte[] GetBytes(PlayerCommand a_command)
-
-        DESCRIPTION
-
-                This function uses marshaling to convert a PlayerCommand structure to a byte
-                array.
-
-        RETURNS
-
-                A byte array containing the structure that it converted.
-
-        AUTHOR
-
-                Vincent McNabb
-
-        DATE
-
-                6:21pm 4/13/2017
-
-        */
-        /**/
+        
         private byte[] GetBytes(PlayerCommand a_command)
         {
             // Get the size of the struct.
@@ -546,37 +443,7 @@ namespace MonopolyClient
             Marshal.FreeHGlobal(ptr);
             return data;
         }
-        /**/
-        /*
-        GetStruct()
-
-        NAME
-
-                GetStruct() - converts a byte array into a struct
-
-        SYNOPSIS
-
-                private PlayerCommand GetStruct(byte[] a_bytes)
-
-        DESCRIPTION
-
-                This function uses marshaling to convert a byte array into a PlayerCommand
-                struct.
-
-        RETURNS
-
-                A PlayerCommand structure containing data from the byte array it converted.
-
-        AUTHOR
-
-                Vincent McNabb
-
-        DATE
-
-                6:24pm 4/13/2017
-
-        */
-        /**/
+        
         private PlayerCommand GetStruct(byte[] a_bytes)
         {
             PlayerCommand structure = new PlayerCommand();
@@ -653,42 +520,7 @@ namespace MonopolyClient
             m_propertiesWithBuildings.Add("Park Place", 0);
             m_propertiesWithBuildings.Add("Boardwalk", 0);
         }
-        /**/
-        /*
-        ReceiveCallback()
-
-        NAME
-
-                ReceiveCallback() - receives information sent from the server
-
-        SYNOPSIS
-
-                private void ReceiveCallback(IAsyncResult AR)
-
-                AR -> the status of an asynchronous operation
-
-        DESCRIPTION
-
-                This function receives an array of bytes sent by the server. It transforms the
-                bytes received into the PlayerCommand structure using GetStruct and proceeds to
-                perform actions based on the Command that was sent through the structure. This is
-                achieved through another large switch statement. After performing the appropriate
-                actions, the client will start accepting information from the server once more.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                6:34pm 4/8/2017
-
-        */
-        /**/
+        
     	private void ReceiveCallback(IAsyncResult AR)
     	{
     		// Get the socket sending info.
@@ -909,43 +741,7 @@ namespace MonopolyClient
     			MessageBox.Show("Connection error.", "Connection Error");
     		}
     	}
-        /**/
-        /*
-        ReceiveCallback()
-
-        NAME
-
-                ReceiveCallback() - receives information sent from the server
-
-        SYNOPSIS
-
-                private void DisplayRolls(string a_buffer)
-
-                a_buffer -> the buffer that contains the die rolls
-
-        DESCRIPTION
-
-                This function receives an array of bytes containg the die roll that was just
-                performed in the game. It reads the die roll by splitting the buffer into a
-                string array, then displays each of them in the respective text boxes for each
-                die roll. Then it looks at the double count that was also sent: if it's less
-                than 1 or greater than 2, the Roll button must be nullified. Then the Done
-                button is enabled since the player no longer needs to roll.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:37pm 4/9/2017
-
-        */
-        /**/
+        
     	private void DisplayRolls(string a_buffer)
     	{
     		// Split the string up. This is easy since the server sends these as comma separated values.
@@ -963,43 +759,7 @@ namespace MonopolyClient
     			if (m_isOurTurn) m_mainWindow.DoneButton = true;
     		}
     	}
-        /**/
-        /*
-        ShowRentDialog()
-
-        NAME
-
-                ShowRentDialog() - shows the rent dialog received from the server
-
-        SYNOPSIS
-
-                private void ShowRentDialog(string a_message, string a_windowName)
-
-                a_message -> the message to display to the client
-                a_windowName -> the name of the window to display
-
-        DESCRIPTION
-
-                This function shows a rent dialog to the player. First, it nulls boxes
-                if it is currently the player's turn so nothing can be interfered with
-                while the rent box is displayed and read. Then it shows the message.
-                After the window is closed, the buttons are reenabled if it is the
-                player's turn.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:46pm 4/9/2017
-
-        */
-        /**/
+        
     	private void ShowRentDialog(string a_message, string a_windowName)
     	{
     		// If it's our turn, null some boxes.
@@ -1032,43 +792,7 @@ namespace MonopolyClient
                 }
             }));
     	}
-        /**/
-        /*
-        ShowRentDialog()
-
-        NAME
-
-                ShowRentDialog() - shows the rent dialog received from the server
-
-        SYNOPSIS
-
-                private void ShowRentDialog(string a_message, string a_windowName)
-
-                a_message -> the message to display to the client
-                a_windowName -> the name of the window to display
-
-        DESCRIPTION
-
-                This function shows a rent dialog to the player. First, it nulls boxes
-                if it is currently the player's turn so nothing can be interfered with
-                while the rent box is displayed and read. Then it shows the message.
-                After the window is closed, the buttons are reenabled if it is the
-                player's turn.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:46pm 4/9/2017
-
-        */
-        /**/
+        
     	private void ShowBuyPropertyDialog(string a_message, string a_name)
     	{
     		// You can only buy a property on your turn, so... null some boxes.
@@ -1140,46 +864,7 @@ namespace MonopolyClient
             m_funds = Int32.Parse(fundsArray[0]);
             m_requestedPlayerFunds = Int32.Parse(fundsArray[1]);
         }
-        /**/
-        /*
-        ReadTradeRequest()
-
-        NAME
-
-                ReadTradeRequest() - shows the rent dialog received from the server
-
-        SYNOPSIS
-
-                private void ReadTradeRequest(string a_requesterName, string a_message)
-
-                a_requesterName -> the name of the person requesting the trade
-                a_message -> the information about the trade to display
-
-        DESCRIPTION
-
-                This function reads a trade request sent from another player. First, it parses
-                the trade info sent into a string array (sent through this format:"property,money,
-                requestedPlay,property,money"). Then it starts building a message saying that a
-                player wants to trade, what this player will receive, and what they must exchange
-                to get what they receive. Then it asks them the question in a MessageBox. If
-                they click Yes, it sends an AcceptTrade command to the server after modifying
-                the initial information to have the original requester within the array.
-                Otherwise, it sends a DeclineTrade command.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                9:14pm 5/30/2017
-
-        */
-        /**/
+        
         private void ReadTradeRequest(string a_requesterName, string a_message)
         {
             // Parse the trade info.
@@ -1215,44 +900,7 @@ namespace MonopolyClient
                 }
             }));
         }
-        /**/
-        /*
-        AcceptTradeActions()
-
-        NAME
-
-                AcceptTradeActions() - perform actions upon reading an AcceptTrade command
-
-        SYNOPSIS
-
-                private void AcceptTradeActions(string a_properties)
-
-                a_properties -> properties to change in the client's propertiesList hashtable
-
-        DESCRIPTION
-
-                This function does actions upon reading an AcceptTrade command from the server.
-                First, it does actions to let the GUI know that properties have new owners.
-                This is done by receiving the comma separated two properties within a_properties.
-                The first property will always be the property to remove and the second to add.
-                If any of these are null, these "highlight" operations are not performed. Afterwards,
-                a message will pop up indicating the trade was successful, and a FundUpdate will be
-                requested.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                11:01pm 5/30/2017
-
-        */
-        /**/
+        
         private void AcceptTradeActions(string a_properties)
         {
             // Perform property switches.
@@ -1280,41 +928,7 @@ namespace MonopolyClient
                 m_buildingProperties.Add(propertiesReceived[i]);
             }
         }
-        /**/
-        /*
-        BankruptActions()
-
-        NAME
-
-                BankruptActions() - shows the rent dialog received from the server
-
-        SYNOPSIS
-
-                private void BankruptActions()
-
-        DESCRIPTION
-
-                This function performs actions upon a player receiving the BankruptWarning command.
-                If it's the player's turn, the Roll and Done buttons are nullified so the player can
-                correct their Bankrupt state. Otherwise, the Buildings button becomes clickable so
-                they can potentially sell off buildings. The Bankruptcy button becoms enabled and a
-                message is displayed that tells the player they are bankrupt and must perform appropriate
-                actions.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                7:07pm 5/31/2017
-
-        */
-        /**/
+        
         private void BankruptActions()
         {
             // If it's our turn, null some buttons.

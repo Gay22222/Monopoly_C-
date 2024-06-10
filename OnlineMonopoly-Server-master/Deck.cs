@@ -68,40 +68,7 @@ namespace OnlineMonopoly
             }
         }
 
-        /**/
-        /*
-        ShuffleDeck()
-
-        NAME
-
-                ShuffleDeck() - shuffles the deck
-
-        SYNOPSIS
-
-                public void ShuffleDeck()
-
-        DESCRIPTION
-
-                This function "shuffles" the deck. This is achieved through initializing a
-                random seed, then going through a for loop 25 times. In each iteration of the
-                loop, it picks a random card in the deck to "take out" and "put at the bottom,"
-                achieved through assigning a Card object to the random index, removing the card
-                at said index, then adding it to the ArrayList.
-
-        RETURNS
-
-                Nothing!
-
-        AUTHOR
-
-                Bryan Leier
-
-        DATE
-
-                8:37pm 3/5/2017
-
-        */
-        /**/
+        
         public void ShuffleDeck()
         {
             // Initialize a Random seed.
