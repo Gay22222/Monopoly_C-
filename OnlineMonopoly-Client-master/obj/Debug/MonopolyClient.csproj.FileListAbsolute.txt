@@ -1,0 +1,30 @@
+c:\users\bryan\documents\visual studio 2015\Projects\MonopolyClient\MonopolyClient\bin\Debug\MonopolyClient.exe.config
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\bin\Debug\MonopolyClient.exe
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\bin\Debug\MonopolyClient.pdb
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.exe
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.pdb
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.csprojResolveAssemblyReference.cache
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.ConnectToServer.resources
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.csproj.GenerateResource.Cache
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.MainWindow.resources
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.PropertiesWindow.resources
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.MortgageWindow.resources
+C:\Users\Bryan\documents\visual studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.TradeWindow.resources
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.BuildingsWindow.resources
+C:\Users\Bryan\Documents\Visual Studio 2015\Projects\MonopolyClient\MonopolyClient\obj\Debug\MonopolyClient.Properties.Resources.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\bin\Debug\MonopolyClient.exe.config
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\bin\Debug\MonopolyClient.exe
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\bin\Debug\MonopolyClient.pdb
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.csproj.AssemblyReference.cache
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.csproj.SuggestedBindingRedirects.cache
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.BuildingsWindow.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.ConnectToServer.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.MainWindow.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.MortgageWindow.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.PropertiesWindow.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.Properties.Resources.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.TradeWindow.resources
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.csproj.GenerateResource.cache
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.csproj.CoreCompileInputs.cache
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.exe
+C:\Users\tieuq\OneDrive\Desktop\hope\OnlineMonopoly-Client-master\obj\Debug\MonopolyClient.pdb
